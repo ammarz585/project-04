@@ -6,9 +6,21 @@ def show_edit_remove_task(content_frame):
     for widget in content_frame.winfo_children():
         widget.destroy()
 
-    tk.Label(content_frame, text="✏️ Edit / Remove Task", font=("Arial", 14, "bold"), bg="white").pack(pady=10)
+    bg = g.current_theme["bg"]
+    fg = g.current_theme["fg"]
+    button_bg = g.current_theme["button_bg"]
+    button_fg = g.current_theme["button_fg"]
+    border_color = g.current_theme.get("border_color", bg)
 
-    listbox = tk.Listbox(content_frame)
+    content_frame.config(bg=bg)
+
+    tk.Label(content_frame, text="✏️ Edit / Remove Task",
+             font=("Arial", 14, "bold"),
+             bg=bg, fg=fg).pack(pady=10)
+
+    listbox = tk.Listbox(content_frame, bg=bg, fg=fg,
+                         highlightbackground=border_color, highlightthickness=1,
+                         selectbackground=button_bg, selectforeground=button_fg)
     listbox.pack(fill="x", padx=10, pady=5)
 
     def refresh_list():
@@ -21,8 +33,11 @@ def show_edit_remove_task(content_frame):
     entries = {}
     fields = ["Name", "Cost", "Value", "Category", "Dependencies (comma separated)"]
     for field in fields:
-        tk.Label(content_frame, text=field + ":", anchor="w", bg="white").pack(fill="x", padx=10)
-        ent = tk.Entry(content_frame)
+        tk.Label(content_frame, text=field + ":",
+                 anchor="w", bg=bg, fg=fg).pack(fill="x", padx=10)
+        ent = tk.Entry(content_frame, bg=button_bg, fg=button_fg,
+                       insertbackground=button_fg,  # cursor color
+                       highlightbackground=border_color, highlightthickness=1)
         ent.pack(fill="x", expand=True, padx=10, pady=5)
         entries[field] = ent
 
@@ -81,9 +96,19 @@ def show_edit_remove_task(content_frame):
         refresh_list()
         messagebox.showinfo("Success", "Task removed")
 
-    btn_frame = tk.Frame(content_frame, bg="white")
+    btn_frame = tk.Frame(content_frame, bg=bg)
     btn_frame.pack(pady=10)
 
-    tk.Button(btn_frame, text="Load", command=load_task, width=12).grid(row=0, column=0, padx=5)
-    tk.Button(btn_frame, text="Save", command=save_task, width=12).grid(row=0, column=1, padx=5)
-    tk.Button(btn_frame, text="Remove", command=remove_task, width=12).grid(row=0, column=2, padx=5)
+
+    btn_params = {
+        "bg": button_bg,
+        "fg": button_fg,
+        "borderwidth": 0,
+        "highlightthickness": 0,
+        "relief": "flat",
+        "width": 12,
+    }
+
+    tk.Button(btn_frame, text="Load", command=load_task, **btn_params).grid(row=0, column=0, padx=5)
+    tk.Button(btn_frame, text="Save", command=save_task, **btn_params).grid(row=0, column=1, padx=5)
+    tk.Button(btn_frame, text="Remove", command=remove_task, **btn_params).grid(row=0, column=2, padx=5)
