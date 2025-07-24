@@ -1,0 +1,24 @@
+Decision-Based Task Scheduler Report
+
+Task: Task 1, Cost: 54, Value: 10
+Task: Task 2, Cost: 335, Value: 8
+Task: Task 3, Cost: 7232, Value: 15
+Task: Task 4, Cost: 10778, Value: 20
+Task: Task 5, Cost: 634, Value: 12
+Task: Task 6, Cost: 9566, Value: 18
+Task: Task 7, Cost: 1188, Value: 25
+Task: Task 8, Cost: 122, Value: 30
+Task: Task 9, Cost: 2000, Value: 40
+Task: Task 10, Cost: 13234, Value: 22
+Task: Task 11, Cost: 18000, Value: 50
+Task: Task 12, Cost: 1575, Value: 35
+Task: Task 13, Cost: 17, Value: 42
+Task: Task 14, Cost: 1434, Value: 27
+Task: Task 15, Cost: 223434, Value: 60
+Task: Task 16, Cost: 25143, Value: 75
+Task: Task 17, Cost: 30, Value: 85
+Task: Task 18, Cost: 3534, Value: 95
+Task: Task 19, Cost: 40434, Value: 100
+Task: Task 20, Cost: 503, Value: 110
+Task: Task 21, Cost: 110000, Value: 1100
+Task: Task 22, Cost: 200000, Value: 50000

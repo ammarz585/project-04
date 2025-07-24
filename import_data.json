@@ -119,6 +119,12 @@
             "value": 110,
             "cost": 503,
             "category": "Analytics"
+        },
+        {
+            "name": "Task 21",
+            "value": 1100,
+            "cost": 110000,
+            "category": "UI"
         }
     ],
     "constraints": []
