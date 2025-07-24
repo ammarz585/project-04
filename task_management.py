@@ -1,17 +1,20 @@
 import tkinter as tk
 from tkinter import messagebox
 import globals as g
+from themes import apply_theme_to_widget
 
 def show_add_task(content_frame):
     for widget in content_frame.winfo_children():
         widget.destroy()
-    tk.Label(content_frame, text="➕ Add Task", font=("Arial", 14, "bold"), bg="white").pack(pady=10)
+    tk.Label(content_frame, text="➕ Add Task", font=("Arial", 14, "bold"),
+             bg=g.current_theme["bg"], fg=g.current_theme["fg"]).pack(pady=10)
 
     entries = {}
     fields = ["Name", "Cost", "Value", "Category", "Dependencies (comma separated)"]
     for field in fields:
-        tk.Label(content_frame, text=field + ":", anchor="w", bg="white").pack(fill="x", padx=10)
-        ent = tk.Entry(content_frame)
+        tk.Label(content_frame, text=field + ":", anchor="w",
+                 bg=g.current_theme["bg"], fg=g.current_theme["fg"]).pack(fill="x", padx=10)
+        ent = tk.Entry(content_frame, bg="white", fg="black")
         ent.pack(fill="x", expand=True, padx=10, pady=5)
         entries[field] = ent
 
@@ -38,15 +41,23 @@ def show_add_task(content_frame):
         for ent in entries.values():
             ent.delete(0, tk.END)
 
-    tk.Button(content_frame, text="Add Task", command=add_task, bg="#4CAF50", fg="white", width=20, height=2).pack(pady=15)
+    btn = tk.Button(content_frame, text="Add Task", command=add_task,
+                    bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"],
+                    activebackground=g.current_theme["button_active_bg"],
+                    activeforeground=g.current_theme["button_active_fg"],
+                    width=20, height=2)
+    apply_theme_to_widget(btn)
+    btn.pack(pady=15)
 
 
 def show_edit_remove_task(content_frame):
     for widget in content_frame.winfo_children():
         widget.destroy()
-    tk.Label(content_frame, text="✏️ Edit  / Remove Task", font=("Arial", 14, "bold"), bg="white").pack(pady=10)
 
-    listbox = tk.Listbox(content_frame)
+    tk.Label(content_frame, text="✏️ Edit / Remove Task", font=("Arial", 14, "bold"),
+             bg=g.current_theme["bg"], fg=g.current_theme["fg"]).pack(pady=10)
+
+    listbox = tk.Listbox(content_frame, bg="white", fg="black")
     listbox.pack(fill="x", padx=10, pady=5)
 
     def refresh_list():
@@ -59,8 +70,9 @@ def show_edit_remove_task(content_frame):
     entries = {}
     fields = ["Name", "Cost", "Value", "Category", "Dependencies (comma separated)"]
     for field in fields:
-        tk.Label(content_frame, text=field + ":", anchor="w", bg="white").pack(fill="x", padx=10)
-        ent = tk.Entry(content_frame)
+        tk.Label(content_frame, text=field + ":", anchor="w",
+                 bg=g.current_theme["bg"], fg=g.current_theme["fg"]).pack(fill="x", padx=10)
+        ent = tk.Entry(content_frame, bg="white", fg="black")
         ent.pack(fill="x", expand=True, padx=10, pady=5)
         entries[field] = ent
 
@@ -119,9 +131,20 @@ def show_edit_remove_task(content_frame):
         refresh_list()
         messagebox.showinfo("Success", "Task removed")
 
-    btn_frame = tk.Frame(content_frame, bg="white")
+    btn_frame = tk.Frame(content_frame, bg=g.current_theme["bg"],
+                         highlightbackground=g.current_theme["bg"], highlightthickness=2)
     btn_frame.pack(pady=10)
 
-    tk.Button(btn_frame, text="Load", command=load_task, width=12, height=1).grid(row=0, column=0, padx=5)
-    tk.Button(btn_frame, text="Save", command=save_task, width=12, height=1).grid(row=0, column=1, padx=5)
-    tk.Button(btn_frame, text="Remove", command=remove_task, width=12, height=1).grid(row=0, column=2, padx=5)
+    btns = [
+        ("Load", load_task),
+        ("Save", save_task),
+        ("Remove", remove_task)
+    ]
+
+    for i, (label, cmd) in enumerate(btns):
+        btn = tk.Button(btn_frame, text=label, command=cmd, width=12, height=1,
+                        bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"],
+                        activebackground=g.current_theme["button_active_bg"],
+                        activeforeground=g.current_theme["button_active_fg"])
+        apply_theme_to_widget(btn)
+        btn.grid(row=0, column=i, padx=5)

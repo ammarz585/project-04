@@ -1,5 +1,5 @@
 from task_form_gui import open_task_form
-from results_gui import open_results_window
+from scheduler_tasks import open_results_window
 from graphs import open_graphs_window
 
 def load_task_form(container):
