@@ -20,7 +20,7 @@ LIGHT_THEME = {
 
 DARK_THEME = {
     "bg": "#1B2B1B",
-    "fg": "#ECF80A",                 # Black text
+    "fg": "#260AF8",                 # Black text
     "button_bg": "#5B875B",
     "button_fg": "#000000",          # Black button text
     "button_active_bg": "#83B184",

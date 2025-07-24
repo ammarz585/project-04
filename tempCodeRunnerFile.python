@@ -1,0 +1,6 @@
+import json
+
+filepath = "D:\\internship\\DSA\\projects\\project4(decision making simulator)\\import_data.json"
+with open(filepath, 'r') as f:
+    data = json.load(f)
+print(data)

@@ -1,0 +1,125 @@
+{
+    "tasks": [
+        {
+            "name": "Task 1",
+            "value": 10,
+            "cost": 54,
+            "category": "UI"
+        },
+        {
+            "name": "Task 2",
+            "value": 8,
+            "cost": 335,
+            "category": "Backend"
+        },
+        {
+            "name": "Task 3",
+            "value": 15,
+            "cost": 7232,
+            "category": "Database"
+        },
+        {
+            "name": "Task 4",
+            "value": 20,
+            "cost": 10778,
+            "category": "UI"
+        },
+        {
+            "name": "Task 5",
+            "value": 12,
+            "cost": 634,
+            "category": "Backend"
+        },
+        {
+            "name": "Task 6",
+            "value": 18,
+            "cost": 9566,
+            "category": "Testing"
+        },
+        {
+            "name": "Task 7",
+            "value": 25,
+            "cost": 1188,
+            "category": "DevOps"
+        },
+        {
+            "name": "Task 8",
+            "value": 30,
+            "cost": 122,
+            "category": "Design"
+        },
+        {
+            "name": "Task 9",
+            "value": 40,
+            "cost": 2000,
+            "category": "UI"
+        },
+        {
+            "name": "Task 10",
+            "value": 22,
+            "cost": 13234,
+            "category": "Frontend"
+        },
+        {
+            "name": "Task 11",
+            "value": 50,
+            "cost": 18000,
+            "category": "Backend"
+        },
+        {
+            "name": "Task 12",
+            "value": 35,
+            "cost": 1575,
+            "category": "Database"
+        },
+        {
+            "name": "Task 13",
+            "value": 42,
+            "cost": 17,
+            "category": "Testing"
+        },
+        {
+            "name": "Task 14",
+            "value": 27,
+            "cost": 1434,
+            "category": "API"
+        },
+        {
+            "name": "Task 15",
+            "value": 60,
+            "cost": 223434,
+            "category": "UX"
+        },
+        {
+            "name": "Task 16",
+            "value": 75,
+            "cost": 25143,
+            "category": "Security"
+        },
+        {
+            "name": "Task 17",
+            "value": 85,
+            "cost": 30,
+            "category": "Optimization"
+        },
+        {
+            "name": "Task 18",
+            "value": 95,
+            "cost": 3534,
+            "category": "UI"
+        },
+        {
+            "name": "Task 19",
+            "value": 100,
+            "cost": 40434,
+            "category": "Backend"
+        },
+        {
+            "name": "Task 20",
+            "value": 110,
+            "cost": 503,
+            "category": "Analytics"
+        }
+    ],
+    "constraints": []
+}

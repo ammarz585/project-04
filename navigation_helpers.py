@@ -1,9 +1,13 @@
+from operator import index
+
+
 def show_page(index, current_page_index, pages, main_menu_btn_frame, title_label,
               btn_prev, btn_next, btn_main_menu, root, apply_theme_to_widget):
     index = max(0, min(index, len(pages) - 1))
     current_page_index[0] = index
 
     if index == 0:
+        # Show main menu buttons and hide other pages
         main_menu_btn_frame.pack(pady=(5, 20))
         for p in pages[1:]:
             p.place_forget()
@@ -11,12 +15,19 @@ def show_page(index, current_page_index, pages, main_menu_btn_frame, title_label
         btn_prev.config(state="disabled")
         btn_next.config(state="disabled")
         btn_main_menu.config(state="disabled")
+
     else:
+        # Hide main menu buttons and show the selected page
         main_menu_btn_frame.pack_forget()
         for p in pages[1:]:
             p.place(relwidth=1, relheight=1)
             p.lower()
+
         pages[index].lift()
+
+        # If it's the graphs page and has refresh_graph method, call it to update plots
+        if index == 3 and hasattr(pages[index], 'refresh_graph'):
+            pages[index].refresh_graph()
 
         titles = [
             "",  # index 0 is main menu
@@ -70,4 +81,3 @@ def on_key_press(event, current_page_index, pages,
         go_main_menu(current_page_index, pages,
                      main_menu_btn_frame, title_label,
                      btn_prev, btn_next, btn_main_menu, root, apply_theme_to_widget)
-

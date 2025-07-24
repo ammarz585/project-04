@@ -1,8 +1,10 @@
 import tkinter as tk
 import globals as g
-from task_management import show_add_task, show_edit_remove_task
+from tkinter import messagebox
+from task_management import show_add_task  # We'll also add populate_tasks_from_json below
+from task_management import show_edit_remove_task
 from constraints_management import show_constraints
-
+from json_task_loader import load_tasks_to_frame
 def open_task_form(parent):
     outer_frame = tk.Frame(parent, bg="white", width=1000)
     outer_frame.pack(fill="both", expand=True)
@@ -53,11 +55,45 @@ def open_task_form(parent):
         for widget in content_frame.winfo_children():
             widget.destroy()
 
-    # Buttons call imported functions with content_frame as argument
-    tk.Button(menu_frame, text="Add Task", width=15, height=2, command=lambda: show_add_task(content_frame)).pack(pady=10)
-    tk.Button(menu_frame, text="Edit/Remove", width=15, height=2, command=lambda: show_edit_remove_task(content_frame)).pack(pady=10)
-    tk.Button(menu_frame, text="Constraints", width=15, height=2, command=lambda: show_constraints(content_frame)).pack(pady=10)
+    # New helper function to populate tasks loaded from JSON
+    def populate_tasks_from_json(tasks, parent_frame):
+        clear_content()
+        # Headers for columns
+        headers = ["Task Name", "Value", "Cost", "Category"]
+        for col, text in enumerate(headers):
+            label = tk.Label(parent_frame, text=text, font=("Arial", 10, "bold"), borderwidth=1, relief="solid", width=15)
+            label.grid(row=0, column=col, sticky="nsew", padx=2, pady=2)
 
-    show_add_task(content_frame)  # Show Add Task by default
+        for row_idx, task in enumerate(tasks, start=1):
+            # Create entries filled with JSON data
+            e_name = tk.Entry(parent_frame)
+            e_name.insert(0, task.get("name", ""))
+            e_name.grid(row=row_idx, column=0, sticky="nsew", padx=2, pady=2)
+
+            e_value = tk.Entry(parent_frame)
+            e_value.insert(0, str(task.get("value", "")))
+            e_value.grid(row=row_idx, column=1, sticky="nsew", padx=2, pady=2)
+
+            e_cost = tk.Entry(parent_frame)
+            e_cost.insert(0, str(task.get("cost", "")))
+            e_cost.grid(row=row_idx, column=2, sticky="nsew", padx=2, pady=2)
+
+            e_category = tk.Entry(parent_frame)
+            e_category.insert(0, task.get("category", ""))
+            e_category.grid(row=row_idx, column=3, sticky="nsew", padx=2, pady=2)
+
+        # Make columns expand equally
+        for col in range(len(headers)):
+            parent_frame.grid_columnconfigure(col, weight=1)
+
+
+
+    # Buttons on left menu
+    tk.Button(menu_frame, text="Add Task", width=15, height=2, command=lambda: (clear_content(), show_add_task(content_frame))).pack(pady=10)
+    tk.Button(menu_frame, text="Edit/Remove", width=15, height=2, command=lambda: (clear_content(), show_edit_remove_task(content_frame))).pack(pady=10)
+    tk.Button(menu_frame, text="Constraints", width=15, height=2, command=lambda: (clear_content(), show_constraints(content_frame))).pack(pady=10)
+    tk.Button(menu_frame, text="Load Data from JSON", width=15, height=2, command=lambda: load_tasks_to_frame(content_frame)).pack(pady=10)
+
+    show_add_task(content_frame)  # Show Add Task page by default
 
     return outer_frame

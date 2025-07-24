@@ -18,10 +18,20 @@ def show_edit_remove_task(content_frame):
              font=("Arial", 14, "bold"),
              bg=bg, fg=fg).pack(pady=10)
 
-    listbox = tk.Listbox(content_frame, bg=bg, fg=fg,
+    # Frame to hold listbox and scrollbar
+    listbox_frame = tk.Frame(content_frame, bg=bg)
+    listbox_frame.pack(fill="x", padx=10, pady=5)
+
+    listbox = tk.Listbox(listbox_frame, bg=bg, fg=fg,
                          highlightbackground=border_color, highlightthickness=1,
-                         selectbackground=button_bg, selectforeground=button_fg)
-    listbox.pack(fill="x", padx=10, pady=5)
+                         selectbackground=button_bg, selectforeground=button_fg,
+                         height=8)  # set visible rows
+
+    scrollbar = tk.Scrollbar(listbox_frame, orient="vertical", command=listbox.yview)
+    listbox.config(yscrollcommand=scrollbar.set)
+
+    listbox.pack(side="left", fill="x", expand=True)
+    scrollbar.pack(side="right", fill="y")
 
     def refresh_list():
         listbox.delete(0, tk.END)
@@ -57,7 +67,7 @@ def show_edit_remove_task(content_frame):
         entries["Category"].delete(0, tk.END)
         entries["Category"].insert(0, t["category"])
         entries["Dependencies (comma separated)"].delete(0, tk.END)
-        entries["Dependencies (comma separated)"].insert(0, ", ".join(t["dependencies"]))
+        entries["Dependencies (comma separated)"].insert(0, ", ".join(t.get("dependencies", [])))
 
     def save_task():
         selected = listbox.curselection()
@@ -98,7 +108,6 @@ def show_edit_remove_task(content_frame):
 
     btn_frame = tk.Frame(content_frame, bg=bg)
     btn_frame.pack(pady=10)
-
 
     btn_params = {
         "bg": button_bg,

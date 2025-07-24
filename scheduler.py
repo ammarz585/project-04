@@ -1,3 +1,5 @@
+import globals as g  # make sure your globals module has current_results dict
+
 def schedule_tasks(strategy, tasks, budget, parallelism):
     """
     Schedule tasks based on strategy and constraints.
@@ -16,13 +18,10 @@ def schedule_tasks(strategy, tasks, budget, parallelism):
 
     # Sort tasks based on strategy
     if strategy == "cost":
-        # Lowest cost tasks first
         sorted_tasks = sorted(tasks, key=lambda t: t["cost"])
     elif strategy == "value":
-        # Highest value tasks first
         sorted_tasks = sorted(tasks, key=lambda t: t["value"], reverse=True)
     elif strategy == "ratio":
-        # Highest value-to-cost ratio first; avoid division by zero
         sorted_tasks = sorted(tasks, key=lambda t: (t["value"] / t["cost"]) if t["cost"] else 0, reverse=True)
     else:
         raise ValueError("Invalid strategy. Choose 'cost', 'value', or 'ratio'.")
@@ -60,5 +59,31 @@ def schedule_tasks(strategy, tasks, budget, parallelism):
     # Add the last slot if it has any tasks
     if current_slot:
         execution_slots.append(current_slot)
+
+    # --- Prepare data for graphs and store in globals.current_results ---
+
+    # Calculate efficiency per slot = total value / total cost per slot
+    efficiency = []
+    for slot in execution_slots:
+        slot_value = sum(t["value"] for t in slot)
+        slot_cost = sum(t["cost"] for t in slot)
+        eff = (slot_value / slot_cost) if slot_cost else 0
+        efficiency.append(eff)
+
+    # Constraint utilization per slot = % utilization of parallelism (tasks scheduled / max parallelism * 100)
+    constraint_utilization = [len(slot) / parallelism * 100 for slot in execution_slots]
+
+    # Schedule cost per slot (sum of costs per slot)
+    schedule_cost = [sum(t["cost"] for t in slot) for slot in execution_slots]
+
+    # Store all results globally for graphs access
+    g.current_results = {
+        "efficiency": efficiency,
+        "constraint_utilization": constraint_utilization,
+        "schedule_cost": schedule_cost,
+        "total_cost": total_cost,
+        "total_value": total_value,
+        "execution_slots": execution_slots,
+    }
 
     return execution_slots, total_cost, total_value

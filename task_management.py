@@ -148,3 +148,5 @@ def show_edit_remove_task(content_frame):
                         activeforeground=g.current_theme["button_active_fg"])
         apply_theme_to_widget(btn)
         btn.grid(row=0, column=i, padx=5)
+
+
