@@ -31,9 +31,14 @@ class GraphsFrame(tk.Frame):
         constraint_util = g.current_results.get("constraint_utilization", [0])
         schedule_cost = g.current_results.get("schedule_cost", [0])
 
-        bg_color = g.current_theme['bg']
-        fg_color = g.current_theme['fg']
-        grid_color = "#444444" if bg_color != "#ffffff" else "#cccccc"
+        bg_color = g.LIGHT_THEME['bg']
+        fg_color = g.LIGHT_THEME['fg']
+        grid_color = "#444444" if bg_color.lower() != "#ffffff" else "#cccccc"
+
+        # Always use light theme colors for graphs (consistent colors)
+        color_efficiency = "#007B8A"   # deep cyan
+        color_constraint = "#D95D39"   # burnt orange
+        color_cost = "#B8860B"         # dark goldenrod
 
         ax1 = self.fig.add_subplot(131, facecolor=bg_color)
         ax2 = self.fig.add_subplot(132, facecolor=bg_color)
@@ -71,7 +76,7 @@ class GraphsFrame(tk.Frame):
 
         self.plotted_points.clear()
 
-        x_smooth1, y_smooth1, x_orig1, y_orig1 = plot_wavy(ax1, efficiency, '#1f77b4', wavy=True)
+        x_smooth1, y_smooth1, x_orig1, y_orig1 = plot_wavy(ax1, efficiency, color_efficiency, wavy=True)
         style_axis(ax1)
         ax1.set_title("Efficiency", fontweight='bold', fontsize=12)
         ax1.set_xlabel("Task/Time")
@@ -86,7 +91,7 @@ class GraphsFrame(tk.Frame):
             "type": "line"
         })
 
-        bars = ax2.bar(range(len(constraint_util)), constraint_util, color='#ff7f0e', edgecolor='black', alpha=0.8)
+        bars = ax2.bar(range(len(constraint_util)), constraint_util, color=color_constraint, edgecolor='black', alpha=0.8)
         style_axis(ax2)
         ax2.set_title("Constraint Utilization", fontweight='bold', fontsize=12)
         ax2.set_xlabel("Constraint ID")
@@ -102,7 +107,7 @@ class GraphsFrame(tk.Frame):
             "bars": bars
         })
 
-        x_smooth3, y_smooth3, x_orig3, y_orig3 = plot_wavy(ax3, schedule_cost, '#2ca02c', marker='x', wavy=True)
+        x_smooth3, y_smooth3, x_orig3, y_orig3 = plot_wavy(ax3, schedule_cost, color_cost, marker='x', wavy=True)
         style_axis(ax3)
         ax3.set_title("Schedule Cost", fontweight='bold', fontsize=12)
         ax3.set_xlabel("Task/Time")
@@ -125,14 +130,12 @@ class GraphsFrame(tk.Frame):
             self.hide_tooltip()
             return
 
-        # Get mouse pixel coordinates relative to canvas
         mx_pixel, my_pixel = event.x, event.y
 
         for data in self.plotted_points:
             if data["ax"] != event.inaxes:
                 continue
 
-            # Convert data points to pixel coordinates for accurate distance check
             ax = data["ax"]
             trans = ax.transData.transform
 
@@ -144,7 +147,7 @@ class GraphsFrame(tk.Frame):
                 min_idx = np.argmin(dists)
                 min_dist = dists[min_idx]
 
-                threshold_pixels = 10  # pixels distance to trigger tooltip
+                threshold_pixels = 10
 
                 if min_dist < threshold_pixels:
                     val = data["y_orig"][min_idx]
@@ -155,13 +158,12 @@ class GraphsFrame(tk.Frame):
                     )
                     return
 
-                # Also check smooth curve (optional, but less meaningful than original points)
                 points_smooth = np.column_stack((data["x_smooth"], data["y_smooth"]))
                 points_smooth_pix = trans(points_smooth)
                 dists_smooth = np.linalg.norm(points_smooth_pix - mouse_point, axis=1)
                 min_dist_smooth = np.min(dists_smooth)
 
-                if min_dist_smooth < threshold_pixels / 2:  # smaller threshold for smooth curve
+                if min_dist_smooth < threshold_pixels / 2:
                     min_idx_smooth = np.argmin(dists_smooth)
                     val_smooth = data["y_smooth"][min_idx_smooth]
                     self.show_tooltip(
@@ -172,7 +174,6 @@ class GraphsFrame(tk.Frame):
                     return
 
             elif data["type"] == "bar":
-                # Check if mouse is inside any bar rectangle (in data coords)
                 mx, my = event.xdata, event.ydata
                 for i, bar in enumerate(data["bars"]):
                     x0 = bar.get_x()

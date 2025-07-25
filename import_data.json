@@ -279,13 +279,6 @@
             "cost": 6060606060606,
             "category": "SyncWare",
             "status": "Pending"
-        },
-        {
-            "name": "task 43545245215",
-            "value": 1,
-            "cost": 3551531524544,
-            "category": "AMMAR MASDMASD",
-            "status": "Pending"
         }
     ],
     "constraints": []

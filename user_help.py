@@ -13,61 +13,83 @@ def user_guide(parent):
 
 👋 Hello! Here's how to get started and make the most out of this app:
 
-1️⃣ **Add Tasks:**
+1️⃣ **Add Tasks or Commands:**
    ➕ Click the **Add New Entry** button.
-   📝 Fill in the task details: 
-      - Task Name (required)
-      - Cost (numeric)
-      - Value (numeric)
-      - Category (optional)
-   🆗 Press **Save Tasks** to save your changes.
+   📝 Fill in:
+      - Task/Command Name ✅
+      - Cost, Value (numeric) 💰📈
+      - Category (optional) 🗂️
+   🔗 Optionally, define **dependencies** for tasks.
+   🆗 Click **Save Tasks** to save your input.
 
-2️⃣ **Edit / Remove Tasks:**
-   🔍 Go to the Edit/Remove page.
-   📋 Select a task from the list.
-   ✏️ Click **Load** to edit details.
-   🗑️ Click **Remove** to delete the selected task.
-   💾 Click **Save** to update changes.
+2️⃣ **Edit / Remove Tasks or Commands:**
+   🛠️ Go to the Edit/Remove section.
+   📋 Select from the list.
+   ✏️ Click **Load** to edit or
+   🗑️ **Remove** to delete.
+   💾 Hit **Save** to finalize changes.
 
-3️⃣ **Load / Save Data (New JSON Feature):**
-   📂 **Load:** Imports tasks from the JSON file located at your specified path.
-      - This replaces current tasks in the app with those loaded from the file.
-      - Use it to quickly add many tasks at once without typing manually.
-   💾 **Save:** Exports your current tasks to the JSON file.
-      - Saves your current task list globally for use across all parts of the app.
-      - Ensures your data persists between sessions.
-   🔄 **Important:** Loaded tasks update the global tasks variable, which is shared app-wide.
+3️⃣ **NEW: Load / Save via JSON 📂💾**
+   🔹 **Load:** Import from a `.json` file.
+      - Replaces current list with data from file.
+      - Useful for batch-importing tasks.
+   🔹 **Save:** Export your data to JSON.
+      - Saves global state of tasks/commands.
+   ⚠️ Shared globally—affects all pages.
 
-4️⃣ **Task Dependencies:**
-   🔗 When editing a task, specify dependencies as comma-separated task names.
-   ⚠️ Ensure these names match existing tasks exactly for scheduling to work.
+4️⃣ **Command Execution Table 🚦**
+   📑 Tracks:
+      - Serial No. 🔢
+      - Command Name 🏷️
+      - Priority 🥇
+      - Execution Status (Pending / Executed) ✅❌
+      - Removal Count ❌➕
+   🔁 Execute commands by **Serial No.**
 
-5️⃣ **Scheduling & Optimization:**
-   🎯 Use the Scheduler to optimize tasks based on cost-to-value ratio.
-   📈 Helps identify the best tasks to focus on within your constraints.
+5️⃣ **Task Dependencies 🔗**
+   - When editing, specify dependencies as comma-separated task names.
+   - ⚠️ Must match names **exactly** for scheduling to work.
 
-6️⃣ **UI and Usability Features:**
-   🌗 Switch between Light and Dark themes using the **Toggle Theme** button.
-   🖱️ Scrollable lists keep navigation smooth even with many tasks.
-   📋 Tables and labels dynamically adjust when resizing the window.
+6️⃣ **Execution & Optimization Engine 🤖**
+   - Choose execution strategy:
+     • **Value-Based** 🌟  
+     • **Cost-Based** 💸  
+     • **Cost-to-Value Ratio** 📊  
+   - Dynamically highlighted in reports based on selection.
+   - Choose strategy via Execution Panel.
 
-7️⃣ **Shortcuts for Power Users:**
-   ⌨️ Use **Ctrl + Right Arrow** and **Ctrl + Left Arrow** to quickly switch between pages.
+7️⃣ **Real-Time Report Generation 📝📈**
+   - Generate PDF reports showing:
+     • Execution table with stats 📊  
+     • Beautiful line/bar graphs 📉  
+   - Automatically uses your current data & selected strategy.
+   - File is saved for review 📁
+
+8️⃣ **Interface & Theme 🖥️**
+   - Use **Toggle Theme** to switch 🌗 Light / 🌘 Dark.
+   - Scrollable lists for long entries 📜
+   - Pages adjust to resizing 🖱️
+
+9️⃣ **Navigation Shortcuts 🚀**
+   - 🔁 **Ctrl + Right Arrow** → Next Page  
+   - 🔁 **Ctrl + Left Arrow** → Previous Page  
+   - 🧭 You can also click arrow buttons (top-left) to switch sections.
 
 ⚠️ **Tips:**
-- Always **Save Tasks** after edits to update both the global variable and JSON file.
-- Numeric fields (Cost, Value) must be valid numbers to avoid errors.
-- Task dependencies should exactly match other task names for correct behavior.
-- Use **Load** to quickly pull data from your JSON file, replacing current tasks.
+- Always **Save Tasks** after changes to reflect updates globally and in JSON.
+- Numeric fields must be valid (Cost, Value).
+- Match dependency names exactly!
+- Use **Load** to quickly populate tasks from JSON.
 
 📞 Need Help?
-Check the README or contact the developer for assistance.
+📃 Check README or contact the developer 👨‍💻 for support.
 
-Thank you for using the app! 🚀
+Thanks for using the app! 💖🚀
 """
 
     text_widget = tk.Text(
-        guide_frame, wrap="word", bg=bg, fg=fg, font=("Segoe UI", 12), bd=0, relief="flat"
+        guide_frame, wrap="word", bg=bg, fg=fg,
+        font=("Segoe UI", 12), bd=0, relief="flat"
     )
     text_widget.insert("1.0", guide_text)
     text_widget.config(state="disabled")  # Read-only

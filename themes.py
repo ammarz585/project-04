@@ -2,38 +2,39 @@ import tkinter as tk
 import globals as g
 
 LIGHT_THEME = {
-    "bg": "#F0F4F3",
-    "fg": "#000000",                 # Black text
-    "button_bg": "#83B184",
-    "button_fg": "#000000",          # Black button text
-    "button_active_bg": "#5B875B",
-    "button_active_fg": "#000000",   # Black active button text
-    "highlight": "#A7D0A7",
-    "menu_bg": "#D9EAD3",
-    "menu_fg": "#000000",            # Black menu text
-    "error_bg": "#FFD6D6",
-    "error_fg": "#000000",           # Black error text
-    "info_bg": "#D6E6FF",
-    "info_fg": "#000000",            # Black info text
-    "border_color": "#F0F4F3"        # Same as background (invisible)
+    "bg": "#F9FAFF",                   # Very light blue-white
+    "fg": "#2C3E50",                   # Slate/navy text
+    "button_bg": "#7986CB",            # Lavender blue
+    "button_fg": "#FFFFFF",            # White button text
+    "button_active_bg": "#5C6BC0",     # Darker lavender on hover
+    "button_active_fg": "#FFFFFF",
+    "highlight": "#D1C4E9",            # Light purple highlight
+    "menu_bg": "#ECEFF1",              # Cool light gray
+    "menu_fg": "#2C3E50",
+    "error_bg": "#FFCDD2",             # Soft pink
+    "error_fg": "#C62828",             # Deep red
+    "info_bg": "#BBDEFB",              # Light blue
+    "info_fg": "#0D47A1",              # Navy blue
+    "border_color": "#D6E4FF"          # Light blue-gray border
 }
 
 DARK_THEME = {
-    "bg": "#1B2B1B",
-    "fg": "#260AF8",                 # Black text
-    "button_bg": "#5B875B",
-    "button_fg": "#000000",          # Black button text
-    "button_active_bg": "#83B184",
-    "button_active_fg": "#000000",   # Black active button text
-    "highlight": "#A7D0A7",
-    "menu_bg": "#102110",
-    "menu_fg": "#000000",            # Black menu text
-    "error_bg": "#7A0000",
-    "error_fg": "#000000",           # Black error text
-    "info_bg": "#003166",
-    "info_fg": "#000000",            # Black info text
-    "border_color": "#1B2B1B"        # Same as background (invisible)
+    "bg": "#1A1B27",                   # Rich indigo/black
+    "fg": "#ECEFF1",                   # Light gray-blue text
+    "button_bg": "#3949AB",            # Indigo button
+    "button_fg": "#FFFFFF",            # White button text
+    "button_active_bg": "#303F9F",     # Darker indigo on hover
+    "button_active_fg": "#FFFFFF",
+    "highlight": "#7C4DFF",            # Electric violet
+    "menu_bg": "#2C2F3B",              # Dark blue-gray
+    "menu_fg": "#BBDEFB",              # Light blue text
+    "error_bg": "#B71C1C",             # Bold red
+    "error_fg": "#FFCDD2",             # Light red text
+    "info_bg": "#1565C0",              # Medium blue
+    "info_fg": "#E3F2FD",              # Pale blue text
+    "border_color": "#3F51B5"          # Visible indigo border
 }
+
 
 def toggle_theme():
     if g.current_theme == LIGHT_THEME:

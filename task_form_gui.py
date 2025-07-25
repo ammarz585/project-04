@@ -1,9 +1,8 @@
 import tkinter as tk
 import globals as g
 from tkinter import messagebox
-from task_management import show_add_task  # We'll also add populate_tasks_from_json below
-from task_management import show_edit_remove_task
 from constraints_management import show_constraints
+from task_management import show_tasks
 from json_task_loader import load_tasks_to_frame
 def open_task_form(parent):
     outer_frame = tk.Frame(parent, bg="white", width=1000)
@@ -89,11 +88,8 @@ def open_task_form(parent):
 
 
     # Buttons on left menu
-    tk.Button(menu_frame, text="Add Task", width=15, height=2, command=lambda: (clear_content(), show_add_task(content_frame))).pack(pady=10)
-    tk.Button(menu_frame, text="Edit/Remove", width=15, height=2, command=lambda: (clear_content(), show_edit_remove_task(content_frame))).pack(pady=10)
-    tk.Button(menu_frame, text="Constraints", width=15, height=2, command=lambda: (clear_content(), show_constraints(content_frame))).pack(pady=10)
-    tk.Button(menu_frame, text="Load Data from JSON", width=15, height=2, command=lambda: load_tasks_to_frame(content_frame)).pack(pady=10)
-
-    show_add_task(content_frame)  # Show Add Task page by default
-
+    tk.Button(menu_frame, text="DATA BASE", width=15, height=2, command=lambda: load_tasks_to_frame(content_frame)).pack(pady=10)
+    tk.Button(menu_frame, text="SHOW ADDED TASKS", width=15, height=2, command=lambda: (clear_content(), show_tasks(content_frame))).pack(pady=10)
+    tk.Button(menu_frame, text="CONSTRAINTS", width=15, height=2, command=lambda: (clear_content(), show_constraints(content_frame))).pack(pady=10)
     return outer_frame
+

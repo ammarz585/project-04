@@ -73,16 +73,22 @@ def go_main_menu(current_page_index, pages, main_menu_btn_frame, title_label,
 def on_key_press(event, current_page_index, pages,
                  main_menu_btn_frame, title_label,
                  btn_prev, btn_next, btn_main_menu, root, apply_theme_to_widget):
-    if event.state & 0x4:  # Ctrl pressed
-        if event.keysym == 'Right':
+    # Check if Ctrl is pressed (event.state & 0x4 is Ctrl on most platforms)
+    if event.state & 0x4:
+        key = event.keysym.lower()
+
+        if key == 'right':
             go_next(current_page_index, pages,
                     main_menu_btn_frame, title_label,
                     btn_prev, btn_next, btn_main_menu, root, apply_theme_to_widget)
-        elif event.keysym == 'Left':
+
+        elif key == 'left':
             go_prev(current_page_index, pages,
                     main_menu_btn_frame, title_label,
                     btn_prev, btn_next, btn_main_menu, root, apply_theme_to_widget)
-    elif event.keysym.lower() == 'm':
-        go_main_menu(current_page_index, pages,
-                     main_menu_btn_frame, title_label,
-                     btn_prev, btn_next, btn_main_menu, root, apply_theme_to_widget)
+
+        elif key == 'm':
+            go_main_menu(current_page_index, pages,
+                         main_menu_btn_frame, title_label,
+                         btn_prev, btn_next, btn_main_menu, root, apply_theme_to_widget)
+    return "break"  # Prevent default behavior of the key press

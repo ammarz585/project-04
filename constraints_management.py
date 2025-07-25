@@ -21,7 +21,7 @@ def show_constraints(content_frame):
     parallel_var = tk.IntVar(value=g.parallelism)
 
     tk.Label(content_frame, text="Budget:", bg=bg, fg=fg).pack()
-    tk.Spinbox(content_frame, from_=0, to=10000, textvariable=budget_var,
+    tk.Spinbox(content_frame, from_=0, to=10000000000000000, textvariable=budget_var,
                width=15, bg=bg, fg=fg, insertbackground=fg).pack(pady=5)
 
     tk.Label(content_frame, text="Parallelism:", bg=bg, fg=fg).pack()

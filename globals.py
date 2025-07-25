@@ -4,7 +4,7 @@ current_theme = LIGHT_THEME
 
 # Task list
 tasks = []
-budget = 100
+budget = 1000000000000000000  # Large budget for testing
 parallelism = 2
 constraints = []
 
