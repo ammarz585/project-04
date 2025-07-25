@@ -2,6 +2,44 @@ import tkinter as tk
 from tkinter import messagebox
 import globals as g
 from themes import apply_theme_to_widget
+import json
+
+def save_tasks_to_json(filepath="D:\\internship\\DSA\\projects\\project4(decision making simulator)\\import_data.json"):
+    import os
+
+    # Load existing data if available
+    if os.path.exists(filepath):
+        with open(filepath, "r") as f:
+            try:
+                existing = json.load(f)
+                existing_tasks = existing.get("tasks", [])
+                existing_constraints = existing.get("constraints", [])
+            except json.JSONDecodeError:
+                existing_tasks = []
+                existing_constraints = []
+    else:
+        existing_tasks = []
+        existing_constraints = []
+
+    # Avoid duplicates based on task name
+    existing_names = {task["name"] for task in existing_tasks}
+    new_tasks = [task for task in g.tasks if task["name"] not in existing_names]
+
+    # Merge constraints
+    merged_constraints = list({json.dumps(c): c for c in (existing_constraints + getattr(g, "constraints", []))}.values())
+
+    # Combine and save
+    all_tasks = existing_tasks + new_tasks
+    with open(filepath, 'w') as f:
+        json.dump({
+            "tasks": all_tasks,
+            "constraints": merged_constraints
+        }, f, indent=4)
+
+    # Update global tasks and constraints
+    g.tasks = all_tasks
+    g.constraints = merged_constraints
+
 
 def show_add_task(content_frame):
     for widget in content_frame.winfo_children():
@@ -34,8 +72,11 @@ def show_add_task(content_frame):
             "cost": int(cost),
             "value": int(value),
             "category": category,
-            "dependencies": dependencies
+            "dependencies": dependencies,
+            "status": "Pending"  # <-- New status field
         })
+
+        save_tasks_to_json()  # Save after adding task
 
         messagebox.showinfo("Success", f"Task '{name}' added!")
         for ent in entries.values():
@@ -63,7 +104,8 @@ def show_edit_remove_task(content_frame):
     def refresh_list():
         listbox.delete(0, tk.END)
         for t in g.tasks:
-            listbox.insert(tk.END, f"{t['name']} (Cost: {t['cost']}, Value: {t['value']})")
+            status = t.get("status", "Pending")  # Display status
+            listbox.insert(tk.END, f"{t['name']} (Cost: {t['cost']}, Value: {t['value']}, Status: {status})")
 
     refresh_list()
 
@@ -110,13 +152,18 @@ def show_edit_remove_task(content_frame):
             messagebox.showerror("Error", "Enter valid values")
             return
 
+        old_status = g.tasks[index].get("status", "Pending")  # Preserve existing status
+
         g.tasks[index] = {
             "name": name,
             "cost": int(cost),
             "value": int(value),
             "category": category,
-            "dependencies": dependencies
+            "dependencies": dependencies,
+            "status": old_status  # Re-set previous status
         }
+
+        save_tasks_to_json()  # Save after editing task
 
         refresh_list()
         messagebox.showinfo("Success", "Task updated")
@@ -128,6 +175,9 @@ def show_edit_remove_task(content_frame):
             return
         index = selected[0]
         del g.tasks[index]
+
+        save_tasks_to_json()  # Save after removing task
+
         refresh_list()
         messagebox.showinfo("Success", "Task removed")
 
@@ -148,5 +198,3 @@ def show_edit_remove_task(content_frame):
                         activeforeground=g.current_theme["button_active_fg"])
         apply_theme_to_widget(btn)
         btn.grid(row=0, column=i, padx=5)
-
-

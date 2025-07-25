@@ -18,16 +18,16 @@ def open_results_window(parent):
     strategy_var = tk.StringVar(value="cost")
 
     rb_cost = tk.Radiobutton(options_frame, text="Cost-Based", variable=strategy_var, value="cost",
-                            bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"],
-                            selectcolor=g.current_theme["bg"])
+                             bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"],
+                             selectcolor=g.current_theme["bg"])
     rb_cost.pack(anchor="w", padx=15, pady=5)
     rb_value = tk.Radiobutton(options_frame, text="Value-Based", variable=strategy_var, value="value",
-                             bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"],
-                             selectcolor=g.current_theme["bg"])
+                              bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"],
+                              selectcolor=g.current_theme["bg"])
     rb_value.pack(anchor="w", padx=15, pady=5)
     rb_ratio = tk.Radiobutton(options_frame, text="Cost-to-Value Ratio", variable=strategy_var, value="ratio",
-                             bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"],
-                             selectcolor=g.current_theme["bg"])
+                              bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"],
+                              selectcolor=g.current_theme["bg"])
     rb_ratio.pack(anchor="w", padx=15, pady=5)
 
     run_btn = tk.Button(options_frame, text="Run OPTIMIZER",
@@ -44,7 +44,6 @@ def open_results_window(parent):
 
     scrollbar = ttk.Scrollbar(results_frame, orient="vertical", command=canvas.yview)
     scrollbar.pack(side="right", fill="y")
-
     canvas.configure(yscrollcommand=scrollbar.set)
 
     inner_frame = tk.Frame(canvas, bg=g.current_theme["bg"])
@@ -60,14 +59,27 @@ def open_results_window(parent):
             widget.destroy()
 
         strategy = strategy_var.get()
+
+        # Step 1: Reset all task statuses
+        for task in g.tasks:
+            task["status"] = "Pending"
+
+        # Step 2: Run scheduling
         execution_slots, total_cost, total_value = schedule_tasks(strategy, g.tasks, g.budget, g.parallelism)
 
+        # Step 3: Update task statuses to 'Executed'
+        executed_names = {task['name'] for slot in execution_slots for task in slot}
+        for task in g.tasks:
+            if task["name"] in executed_names:
+                task["status"] = "Executed"
+
+        # Step 4: Show results
         for i, slot in enumerate(execution_slots):
             tk.Label(inner_frame, text=f"Slot {i + 1}:", bg=g.current_theme["bg"], fg=g.current_theme["fg"],
                      font=("Arial", 11, "bold")).pack(anchor="w", padx=10, pady=(10, 0))
             for task in slot:
-                tk.Label(inner_frame, text=f"- {task['name']} (Cost: {task['cost']}, Value: {task['value']})",
-                         bg=g.current_theme["bg"], fg=g.current_theme["fg"]).pack(anchor="w", padx=30)
+                text = f"- {task['name']} (Cost: {task['cost']}, Value: {task['value']}, Status: {task['status']})"
+                tk.Label(inner_frame, text=text, bg=g.current_theme["bg"], fg=g.current_theme["fg"]).pack(anchor="w", padx=30)
 
         tk.Label(inner_frame, text=f"\nTotal Cost: {total_cost}", bg=g.current_theme["bg"], fg="blue",
                  font=("Arial", 11, "bold")).pack(anchor="w", padx=10, pady=(20, 0))
@@ -78,7 +90,6 @@ def open_results_window(parent):
 
     run_btn.config(command=run_scheduler)
 
-    # Theme apply function to update colors dynamically
     def apply_theme():
         frame.config(bg=g.current_theme["bg"])
         options_frame.config(bg=g.current_theme["button_bg"])
@@ -88,16 +99,13 @@ def open_results_window(parent):
             rb.config(bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"], selectcolor=g.current_theme["bg"])
 
         run_btn.config(bg=g.current_theme["button_bg"], fg=g.current_theme["button_fg"])
-
         results_frame.config(bg=g.current_theme["bg"])
         canvas.config(bg=g.current_theme["bg"])
         inner_frame.config(bg=g.current_theme["bg"])
 
-        # Update all labels inside inner_frame (if any)
         for child in inner_frame.winfo_children():
             if isinstance(child, tk.Label):
                 child.config(bg=g.current_theme["bg"], fg=g.current_theme["fg"])
 
-    frame.apply_theme = apply_theme  # Attach method for external calls
-
+    frame.apply_theme = apply_theme
     return frame

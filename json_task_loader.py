@@ -21,6 +21,7 @@ def create_entry_row(frame, task_data=None, row=None):
     value_var = tk.StringVar(value=str(task_data["value"]) if task_data else "")
     cost_var = tk.StringVar(value=str(task_data["cost"]) if task_data else "")
     category_var = tk.StringVar(value=task_data["category"] if task_data else "")
+    status_var = tk.StringVar(value=task_data.get("status", "Pending") if task_data else "Pending")
 
     e1 = tk.Entry(frame, textvariable=name_var)
     e1.grid(row=row, column=0, padx=5, pady=2, sticky="ew")
@@ -30,12 +31,15 @@ def create_entry_row(frame, task_data=None, row=None):
     e3.grid(row=row, column=2, padx=5, pady=2, sticky="ew")
     e4 = tk.Entry(frame, textvariable=category_var)
     e4.grid(row=row, column=3, padx=5, pady=2, sticky="ew")
+    e5 = tk.Entry(frame, textvariable=status_var, state="readonly")  # Status is read-only
+    e5.grid(row=row, column=4, padx=5, pady=2, sticky="ew")
 
     entries.append({
         "name": name_var,
         "value": value_var,
         "cost": cost_var,
-        "category": category_var
+        "category": category_var,
+        "status": status_var
     })
 
 def save_tasks():
@@ -53,11 +57,21 @@ def save_tasks():
         except ValueError:
             cost = 0
         category = row["category"].get().strip()
+
+        # Update status based on executed_tasks and removed_tasks sets
+        if name in g.executed_tasks:
+            status = "Executed"
+        elif name in g.removed_tasks:
+            status = "Removed"
+        else:
+            status = "Pending"
+
         new_tasks.append({
             "name": name,
             "value": value,
             "cost": cost,
-            "category": category
+            "category": category,
+            "status": status
         })
 
     g.tasks = new_tasks
@@ -77,22 +91,31 @@ def load_tasks_to_frame(frame):
     heading_frame = tk.Frame(frame, bg="white")
     heading_frame.pack(fill="x", padx=5, pady=(10, 2))
 
-    for i in range(4):
+    for i in range(5):  # 5 columns: name, value, cost, category, status
         heading_frame.grid_columnconfigure(i, weight=1)
 
     tk.Label(heading_frame, text="Name", bg="white", anchor="w", font=('Arial', 10, 'bold')).grid(row=0, column=0, padx=5, sticky="ew")
     tk.Label(heading_frame, text="Value", bg="white", anchor="w", font=('Arial', 10, 'bold')).grid(row=0, column=1, padx=5, sticky="ew")
     tk.Label(heading_frame, text="Cost", bg="white", anchor="w", font=('Arial', 10, 'bold')).grid(row=0, column=2, padx=5, sticky="ew")
     tk.Label(heading_frame, text="Category", bg="white", anchor="w", font=('Arial', 10, 'bold')).grid(row=0, column=3, padx=5, sticky="ew")
+    tk.Label(heading_frame, text="Status", bg="white", anchor="w", font=('Arial', 10, 'bold')).grid(row=0, column=4, padx=5, sticky="ew")
 
     # Entries frame
     entries_frame = tk.Frame(frame, bg="white")
     entries_frame.pack(fill="both", expand=True, padx=5)
 
-    for i in range(4):
+    for i in range(5):
         entries_frame.grid_columnconfigure(i, weight=1)
 
     for idx, task in enumerate(tasks):
+        # To keep status synced with global sets:
+        if task["name"] in g.executed_tasks:
+            task["status"] = "Executed"
+        elif task["name"] in g.removed_tasks:
+            task["status"] = "Removed"
+        else:
+            task["status"] = task.get("status", "Pending")
+
         create_entry_row(entries_frame, task_data=task, row=idx)
 
     # Button row

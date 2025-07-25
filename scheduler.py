@@ -19,10 +19,13 @@ def schedule_tasks(strategy, tasks, budget, parallelism):
     # Sort tasks based on strategy
     if strategy == "cost":
         sorted_tasks = sorted(tasks, key=lambda t: t["cost"])
+        g.execution_type = "Cost-Based"
     elif strategy == "value":
         sorted_tasks = sorted(tasks, key=lambda t: t["value"], reverse=True)
+        g.execution_type = "Value-Based"
     elif strategy == "ratio":
         sorted_tasks = sorted(tasks, key=lambda t: (t["value"] / t["cost"]) if t["cost"] else 0, reverse=True)
+        g.execution_type = "Cost-to-Value-Based"
     else:
         raise ValueError("Invalid strategy. Choose 'cost', 'value', or 'ratio'.")
 

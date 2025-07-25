@@ -28,13 +28,18 @@ def show_page(index, current_page_index, pages, main_menu_btn_frame, title_label
         # If it's the graphs page and has refresh_graph method, call it to update plots
         if index == 3 and hasattr(pages[index], 'refresh_graph'):
             pages[index].refresh_graph()
+        # If it's the report page (last page) and has generate_graph method, call it
+        elif index == len(pages) - 1 and hasattr(pages[index], 'generate_graph'):
+            pages[index].generate_graph()
 
         titles = [
             "",  # index 0 is main menu
             "➕ Tasks Management",
             "📊 Schedule Tasks",
             "📈 View Graphs",
-            "📘 User Guide"
+            "📘 User Guide",
+            # Add your report page title here
+            "📄 Generate Report"
         ]
 
         title_label.config(text=titles[index] if index < len(titles) else "")

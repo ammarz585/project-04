@@ -4,7 +4,7 @@ import globals as g
 from themes import toggle_theme, apply_theme_to_widget
 from pages_load import load_task_form, load_results_window, load_graphs_window, load_user_guide
 import navigation_helpers as nav
-from report_generator import save_results_to_report
+from report_generator import ReportGeneratorPage  # ✅ Must be a class-based Page
 
 def open_main_menu():
     root = tk.Tk()
@@ -54,11 +54,13 @@ def open_main_menu():
                          highlightbackground=g.current_theme["border_color"], highlightthickness=1)
     container.pack(fill="both", expand=True)
 
+    # Load all pages including the report page
     pages.extend([
         load_task_form(container),
         load_results_window(container),
         load_graphs_window(container),
-        load_user_guide(container)
+        load_user_guide(container),
+        ReportGeneratorPage(container)  # ✅ Add report generator page as last page
     ])
 
     for page in pages[1:]:
@@ -108,7 +110,7 @@ def open_main_menu():
 
     btn_toggle_theme.config(command=on_toggle_theme)
 
-    # Main Menu Buttons
+    # === Main Menu Buttons ===
     tk.Button(main_menu_btn_frame, text="➕  TASKS MANAGEMENT",
               command=functools.partial(nav.show_page, 1, current_page_index, pages,
                                         main_menu_btn_frame, title_label,
@@ -134,12 +136,15 @@ def open_main_menu():
               **button_params).pack(pady=5)
 
     tk.Button(main_menu_btn_frame, text="💾 GENERATE RESULTS REPORT",
-              command=save_results_to_report, **button_params).pack(pady=5)
+              command=functools.partial(nav.show_page, 5, current_page_index, pages,
+                                        main_menu_btn_frame, title_label,
+                                        btn_prev, btn_next, btn_main_menu, root, apply_theme_to_widget),
+              **button_params).pack(pady=5)
 
     tk.Button(main_menu_btn_frame, text="❌ Exit", command=root.quit,
               **button_params).pack(pady=10)
 
-    # Keyboard navigation: pass all needed args using partial
+    # Keyboard navigation
     root.bind_all('<KeyPress>', lambda e: nav.on_key_press(
         e, current_page_index, pages,
         main_menu_btn_frame, title_label,
