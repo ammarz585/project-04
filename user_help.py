@@ -13,8 +13,9 @@ def user_guide(parent):
 
 👋 Hello! Here's how to get started and make the most out of this app:
 
-1️⃣ **Add Tasks or Commands:**
-   ➕ Click the **Add New Entry** button.
+1️⃣ **Tasks management :**
+   ➕ Click the **DATA BASE** button.
+   click add new entry:
    📝 Fill in:
       - Task/Command Name ✅
       - Cost, Value (numeric) 💰📈
@@ -23,10 +24,8 @@ def user_guide(parent):
    🆗 Click **Save Tasks** to save your input.
 
 2️⃣ **Edit / Remove Tasks or Commands:**
-   🛠️ Go to the Edit/Remove section.
    📋 Select from the list.
-   ✏️ Click **Load** to edit or
-   🗑️ **Remove** to delete.
+   ✏️ Click to 🗑️ **Remove** to delete.
    💾 Hit **Save** to finalize changes.
 
 3️⃣ **NEW: Load / Save via JSON 📂💾**
@@ -39,13 +38,13 @@ def user_guide(parent):
 
 4️⃣ **Command Execution Table 🚦**
    📑 Tracks:
-      - Serial No. 🔢
+      - value 🔢
       - Command Name 🏷️
-      - Priority 🥇
+      - cost 🥇
       - Execution Status (Pending / Executed) ✅❌
-      - Removal Count ❌➕
-   🔁 Execute commands by **Serial No.**
-
+   🔁 Execute commands by **cost.**
+   🔁 Execute commands by **cost and value ratio.**
+   🔁 Execute commands by **Value.**
 5️⃣ **Task Dependencies 🔗**
    - When editing, specify dependencies as comma-separated task names.
    - ⚠️ Must match names **exactly** for scheduling to work.
@@ -73,7 +72,9 @@ def user_guide(parent):
 9️⃣ **Navigation Shortcuts 🚀**
    - 🔁 **Ctrl + Right Arrow** → Next Page  
    - 🔁 **Ctrl + Left Arrow** → Previous Page  
-   - 🧭 You can also click arrow buttons (top-left) to switch sections.
+   - 🔁 **Ctrl + m** → Main Menu  
+   
+   - 🧭 You can also click  buttons (top-left) to switch sections.
 
 ⚠️ **Tips:**
 - Always **Save Tasks** after changes to reflect updates globally and in JSON.

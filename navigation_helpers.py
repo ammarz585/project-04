@@ -38,7 +38,6 @@ def show_page(index, current_page_index, pages, main_menu_btn_frame, title_label
             "📊 Schedule Tasks",
             "📈 View Graphs",
             "📘 User Guide",
-            # Add your report page title here
             "📄 Generate Report"
         ]
 

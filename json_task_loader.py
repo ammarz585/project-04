@@ -155,7 +155,6 @@ def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
         g.tasks = tasks
 
     total_rows = len(tasks) + ui_extra_entries
-
     selected_vars = {i: tk.BooleanVar(value=False) for i in range(total_rows)}
 
     # Clear frame contents
@@ -172,26 +171,46 @@ def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
         lbl.grid(row=0, column=col, sticky="ew", padx=3, pady=2)
         heading_frame.grid_columnconfigure(col, weight=1)
 
-    # Scrollable frame setup
-    container = tk.Frame(frame)
-    container.pack(fill="both", expand=True, padx=5, pady=5)
+    # Scrollable frame container (fixed height so buttons stay visible)
+    container = tk.Frame(frame, height=350)  # adjust height as needed
+    container.pack(fill="both", expand=False, padx=5, pady=5)
 
     canvas = tk.Canvas(container)
     scrollbar = tk.Scrollbar(container, orient="vertical", command=canvas.yview)
-    scrollable_frame = tk.Frame(canvas)
-
-    scrollable_frame.bind(
-        "<Configure>",
-        lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
-    )
-
-    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
     canvas.configure(yscrollcommand=scrollbar.set)
 
-    canvas.pack(side="left", fill="both", expand=True)
     scrollbar.pack(side="right", fill="y")
+    canvas.pack(side="left", fill="both", expand=True)
 
-    # Add rows for existing tasks
+    scrollable_frame = tk.Frame(canvas)
+    scrollable_window = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+
+    def on_frame_configure(event):
+        canvas.configure(scrollregion=canvas.bbox("all"))
+
+    def resize_canvas(event):
+        canvas.itemconfig(scrollable_window, width=event.width)
+
+    scrollable_frame.bind("<Configure>", on_frame_configure)
+    canvas.bind("<Configure>", resize_canvas)
+
+    # === Add mouse wheel scrolling support here ===
+    def _on_mousewheel(event):
+        # For Windows and MacOS
+        canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+    def _on_mousewheel_linux_up(event):
+        canvas.yview_scroll(-1, "units")
+
+    def _on_mousewheel_linux_down(event):
+        canvas.yview_scroll(1, "units")
+
+    # Bind mouse wheel to canvas scroll
+    canvas.bind_all("<MouseWheel>", _on_mousewheel)          # Windows and MacOS
+    canvas.bind_all("<Button-4>", _on_mousewheel_linux_up)   # Linux scroll up
+    canvas.bind_all("<Button-5>", _on_mousewheel_linux_down) # Linux scroll down
+
+    # Task rows
     for idx, task in enumerate(tasks):
         if task["name"] in g.executed_tasks:
             task["status"] = "Executed"
@@ -199,10 +218,9 @@ def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
             task["status"] = "Removed"
         else:
             task["status"] = task.get("status", "Pending")
-
         create_entry_row(scrollable_frame, task, idx, selected_vars, is_extra=False)
 
-    # Add rows for extra unsaved entries
+    # Extra entry rows
     for i in range(ui_extra_entries):
         empty_task = {
             "name": "",
@@ -211,21 +229,20 @@ def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
             "category": "",
             "status": "Pending"
         }
-        create_entry_row(scrollable_frame, empty_task, len(tasks) + i, selected_vars, is_extra=True)
+        entry_widgets = create_entry_row(scrollable_frame, empty_task, len(tasks) + i, selected_vars, is_extra=True)
 
-    # Buttons frame
+    # Button panel (always visible)
     buttons_frame = tk.Frame(frame, bg="white")
     buttons_frame.pack(fill="x", padx=5, pady=5)
 
     def add_new_entry():
         global ui_extra_entries
         ui_extra_entries += 1
-        # Instead of reloading with only saved tasks, keep the current UI data by saving first
         save_current_ui_to_globals()
         load_tasks_to_frame(current_frame)
+        frame.after(100, lambda: entries[-1]["name"].focus_set())
 
     def save_current_ui_to_globals():
-        """Helper: Save current UI entries to g.tasks before reloading UI."""
         global entries
         temp_tasks = []
         for row_vars in entries:
@@ -264,7 +281,7 @@ def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
     tk.Button(buttons_frame, text="Load to System", command=load_json_to_globals).pack(side="left", padx=5)
     tk.Button(buttons_frame, text="Save Changes", command=save_tasks).pack(side="right", padx=5)
 
-    def on_frame_resize(event):
+    def on_resize(event):
         canvas.configure(width=event.width)
 
-    frame.bind("<Configure>", on_frame_resize)
+    frame.bind("<Configure>", on_resize)

@@ -4,8 +4,8 @@ current_theme = LIGHT_THEME
 
 # Task list
 tasks = []
-budget = 1000000000000000000  # Large budget for testing
-parallelism = 2
+budget = 10000  # Large budget for testing
+parallelism = 4
 constraints = []
 
 # Results for graphs

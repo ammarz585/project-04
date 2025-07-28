@@ -1,283 +1,353 @@
 {
     "tasks": [
         {
-            "name": "task 10000001",
-            "value": 87,
-            "cost": 98234234432432,
-            "category": "AlphaX",
+            "name": "task 01",
+            "value": 20,
+            "cost": 1000,
+            "category": "A",
             "status": "Pending"
         },
         {
-            "name": "task 10000002",
-            "value": 42,
-            "cost": 87234982374923,
-            "category": "BetaZone",
+            "name": "task 02",
+            "value": 30,
+            "cost": 1100,
+            "category": "B",
             "status": "Pending"
         },
         {
-            "name": "task 10000003",
-            "value": 78,
-            "cost": 99892349823498,
-            "category": "Gamma",
+            "name": "task 03",
+            "value": 25,
+            "cost": 1050,
+            "category": "C",
             "status": "Pending"
         },
         {
-            "name": "task 10000004",
-            "value": 93,
-            "cost": 123456789012345,
-            "category": "DeltaTech",
+            "name": "task 04",
+            "value": 40,
+            "cost": 1200,
+            "category": "D",
             "status": "Pending"
         },
         {
-            "name": "task 10000005",
-            "value": 51,
-            "cost": 11223344556677,
-            "category": "ZetaWorks",
+            "name": "task 05",
+            "value": 35,
+            "cost": 1150,
+            "category": "E",
             "status": "Pending"
         },
         {
-            "name": "task 10000006",
-            "value": 99,
-            "cost": 77665544332211,
-            "category": "LambdaCore",
+            "name": "task 06",
+            "value": 50,
+            "cost": 1300,
+            "category": "F",
             "status": "Pending"
         },
         {
-            "name": "task 10000007",
-            "value": 69,
-            "cost": 45678901234567,
-            "category": "OmicronAI",
+            "name": "task 07",
+            "value": 45,
+            "cost": 1250,
+            "category": "G",
             "status": "Pending"
         },
         {
-            "name": "task 10000008",
-            "value": 88,
-            "cost": 98765432123456,
-            "category": "SigmaLogic",
+            "name": "task 08",
+            "value": 60,
+            "cost": 1400,
+            "category": "H",
             "status": "Pending"
         },
         {
-            "name": "task 10000009",
-            "value": 77,
-            "cost": 99887766554433,
-            "category": "EpsilonSoft",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000010",
-            "value": 66,
-            "cost": 90909090909090,
-            "category": "ThetaByte",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000011",
+            "name": "task 09",
             "value": 55,
-            "cost": 80808080808080,
-            "category": "IotaSys",
+            "cost": 1350,
+            "category": "I",
             "status": "Pending"
         },
         {
-            "name": "task 10000012",
-            "value": 73,
-            "cost": 70707070707070,
-            "category": "KappaCloud",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000013",
-            "value": 91,
-            "cost": 60606060606060,
-            "category": "MuWare",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000014",
-            "value": 63,
-            "cost": 50505050505050,
-            "category": "NuDrive",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000015",
-            "value": 84,
-            "cost": 40404040404040,
-            "category": "XiSecure",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000016",
-            "value": 72,
-            "cost": 30303030303030,
-            "category": "OmniNet",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000017",
-            "value": 90,
-            "cost": 20202020202020,
-            "category": "PiPulse",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000018",
-            "value": 47,
-            "cost": 11111111111111,
-            "category": "RhoForce",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000019",
-            "value": 83,
-            "cost": 98989898989898,
-            "category": "SigmaFusion",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000020",
-            "value": 58,
-            "cost": 87878787878787,
-            "category": "TauVision",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000021",
-            "value": 81,
-            "cost": 76767676767676,
-            "category": "UpsilonGroup",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000022",
-            "value": 79,
-            "cost": 65656565656565,
-            "category": "PhiMotion",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000023",
-            "value": 74,
-            "cost": 54545454545454,
-            "category": "ChiWave",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000024",
-            "value": 86,
-            "cost": 43434343434343,
-            "category": "PsiLabs",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000025",
-            "value": 92,
-            "cost": 32323232323232,
-            "category": "OmegaDynamics",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000026",
-            "value": 49,
-            "cost": 21212121212121,
-            "category": "NeoQuantum",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000027",
-            "value": 61,
-            "cost": 19191919191919,
-            "category": "MetaNode",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000028",
+            "name": "task 10",
             "value": 70,
-            "cost": 18181818181818,
-            "category": "HyperBot",
+            "cost": 1500,
+            "category": "J",
             "status": "Pending"
         },
         {
-            "name": "task 10000029",
-            "value": 68,
-            "cost": 17171717171717,
-            "category": "RoboSys",
+            "name": "task 11",
+            "value": 65,
+            "cost": 1550,
+            "category": "K",
             "status": "Pending"
         },
         {
-            "name": "task 10000030",
-            "value": 95,
-            "cost": 16161616161616,
-            "category": "NanoSoft",
+            "name": "task 12",
+            "value": 80,
+            "cost": 1600,
+            "category": "L",
             "status": "Pending"
         },
         {
-            "name": "task 10000031",
-            "value": 82,
-            "cost": 15151515151515,
-            "category": "TerraAI",
+            "name": "task 13",
+            "value": 75,
+            "cost": 1580,
+            "category": "M",
             "status": "Pending"
         },
         {
-            "name": "task 10000032",
-            "value": 89,
-            "cost": 14141414141414,
-            "category": "GridOps",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000033",
+            "name": "task 14",
             "value": 85,
-            "cost": 13131313131313,
-            "category": "SkyData",
+            "cost": 1700,
+            "category": "N",
             "status": "Pending"
         },
         {
-            "name": "task 10000034",
-            "value": 76,
-            "cost": 12121212121212,
-            "category": "Streamify",
+            "name": "task 15",
+            "value": 78,
+            "cost": 1680,
+            "category": "O",
             "status": "Pending"
         },
         {
-            "name": "task 10000035",
-            "value": 64,
-            "cost": 11111111111110,
-            "category": "ClickWave",
+            "name": "task 16",
+            "value": 90,
+            "cost": 1800,
+            "category": "P",
             "status": "Pending"
         },
         {
-            "name": "task 10000036",
-            "value": 96,
-            "cost": 10101010101010,
-            "category": "PrimeLab",
+            "name": "task 17",
+            "value": 82,
+            "cost": 1780,
+            "category": "Q",
             "status": "Pending"
         },
         {
-            "name": "task 10000037",
-            "value": 98,
-            "cost": 9090909090909,
-            "category": "NextLogic",
+            "name": "task 18",
+            "value": 95,
+            "cost": 1900,
+            "category": "R",
             "status": "Pending"
         },
         {
-            "name": "task 10000038",
-            "value": 67,
-            "cost": 8080808080808,
-            "category": "QbitNet",
-            "status": "Pending"
-        },
-        {
-            "name": "task 10000039",
+            "name": "task 19",
             "value": 88,
-            "cost": 7070707070707,
-            "category": "BitWorks",
+            "cost": 1880,
+            "category": "S",
             "status": "Pending"
         },
         {
-            "name": "task 10000040",
-            "value": 94,
-            "cost": 6060606060606,
-            "category": "SyncWare",
+            "name": "task 20",
+            "value": 100,
+            "cost": 2000,
+            "category": "T",
+            "status": "Pending"
+        },
+        {
+            "name": "task 21",
+            "value": 93,
+            "cost": 1980,
+            "category": "U",
+            "status": "Pending"
+        },
+        {
+            "name": "task 22",
+            "value": 85,
+            "cost": 1950,
+            "category": "V",
+            "status": "Pending"
+        },
+        {
+            "name": "task 23",
+            "value": 78,
+            "cost": 1920,
+            "category": "W",
+            "status": "Pending"
+        },
+        {
+            "name": "task 24",
+            "value": 70,
+            "cost": 1890,
+            "category": "X",
+            "status": "Pending"
+        },
+        {
+            "name": "task 25",
+            "value": 63,
+            "cost": 1850,
+            "category": "Y",
+            "status": "Pending"
+        },
+        {
+            "name": "task 26",
+            "value": 55,
+            "cost": 1800,
+            "category": "Z",
+            "status": "Pending"
+        },
+        {
+            "name": "task 27",
+            "value": 48,
+            "cost": 1750,
+            "category": "AA",
+            "status": "Pending"
+        },
+        {
+            "name": "task 28",
+            "value": 40,
+            "cost": 1700,
+            "category": "AB",
+            "status": "Pending"
+        },
+        {
+            "name": "task 29",
+            "value": 33,
+            "cost": 1650,
+            "category": "AC",
+            "status": "Pending"
+        },
+        {
+            "name": "task 30",
+            "value": 25,
+            "cost": 1600,
+            "category": "AD",
+            "status": "Pending"
+        },
+        {
+            "name": "task 31",
+            "value": 18,
+            "cost": 1550,
+            "category": "AE",
+            "status": "Pending"
+        },
+        {
+            "name": "task 32",
+            "value": 22,
+            "cost": 1500,
+            "category": "AF",
+            "status": "Pending"
+        },
+        {
+            "name": "task 33",
+            "value": 30,
+            "cost": 1450,
+            "category": "AG",
+            "status": "Pending"
+        },
+        {
+            "name": "task 34",
+            "value": 35,
+            "cost": 1400,
+            "category": "AH",
+            "status": "Pending"
+        },
+        {
+            "name": "task 35",
+            "value": 42,
+            "cost": 1350,
+            "category": "AI",
+            "status": "Pending"
+        },
+        {
+            "name": "task 36",
+            "value": 50,
+            "cost": 1300,
+            "category": "AJ",
+            "status": "Pending"
+        },
+        {
+            "name": "task 37",
+            "value": 58,
+            "cost": 1250,
+            "category": "AK",
+            "status": "Pending"
+        },
+        {
+            "name": "task 38",
+            "value": 65,
+            "cost": 1200,
+            "category": "AL",
+            "status": "Pending"
+        },
+        {
+            "name": "task 39",
+            "value": 73,
+            "cost": 1150,
+            "category": "AM",
+            "status": "Pending"
+        },
+        {
+            "name": "task 40",
+            "value": 80,
+            "cost": 1100,
+            "category": "AN",
+            "status": "Pending"
+        },
+        {
+            "name": "task 41",
+            "value": 88,
+            "cost": 1050,
+            "category": "AO",
+            "status": "Pending"
+        },
+        {
+            "name": "task 42",
+            "value": 95,
+            "cost": 1000,
+            "category": "AP",
+            "status": "Pending"
+        },
+        {
+            "name": "task 43",
+            "value": 100,
+            "cost": 950,
+            "category": "AQ",
+            "status": "Pending"
+        },
+        {
+            "name": "task 44",
+            "value": 92,
+            "cost": 1000,
+            "category": "AR",
+            "status": "Pending"
+        },
+        {
+            "name": "task 45",
+            "value": 85,
+            "cost": 1050,
+            "category": "AS",
+            "status": "Pending"
+        },
+        {
+            "name": "task 46",
+            "value": 78,
+            "cost": 1100,
+            "category": "AT",
+            "status": "Pending"
+        },
+        {
+            "name": "task 47",
+            "value": 70,
+            "cost": 1150,
+            "category": "AU",
+            "status": "Pending"
+        },
+        {
+            "name": "task 48",
+            "value": 63,
+            "cost": 1200,
+            "category": "AV",
+            "status": "Pending"
+        },
+        {
+            "name": "task 49",
+            "value": 55,
+            "cost": 1250,
+            "category": "AW",
+            "status": "Pending"
+        },
+        {
+            "name": "task 50",
+            "value": 48,
+            "cost": 1300,
+            "category": "AX",
             "status": "Pending"
         }
     ],

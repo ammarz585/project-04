@@ -53,11 +53,12 @@ def show_tasks(content_frame):
              bg=g.current_theme.get("bg", "white"), fg=g.current_theme.get("fg", "black")).pack(pady=10)
 
     # Frame to hold listbox and scrollbar side by side
-    listbox_frame = tk.Frame(content_frame)
+    listbox_frame = tk.Frame(content_frame, height=400)  # 👈 Increased height
     listbox_frame.pack(fill="both", expand=True, padx=10, pady=5)
 
-    # Create listbox
-    listbox = tk.Listbox(listbox_frame, bg="white", fg="black", selectmode=tk.SINGLE)
+    # Create listbox with increased height using height parameter
+    listbox = tk.Listbox(listbox_frame, bg="white", fg="black", selectmode=tk.SINGLE,
+                         font=("Arial", 11), height=20)  # 👈 More visible rows
     listbox.pack(side="left", fill="both", expand=True)
 
     # Create vertical scrollbar and link to listbox
@@ -74,7 +75,6 @@ def show_tasks(content_frame):
 
     refresh_list()
 
-    
     
 
    

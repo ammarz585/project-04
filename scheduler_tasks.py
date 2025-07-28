@@ -39,7 +39,7 @@ def open_results_window(parent):
     results_frame = tk.Frame(frame, bg=g.current_theme["bg"], bd=2, relief="sunken")
     results_frame.pack(side="right", fill="both", expand=True, padx=5, pady=5)
 
-    canvas = tk.Canvas(results_frame, bg=g.current_theme["bg"])
+    canvas = tk.Canvas(results_frame, bg=g.current_theme["bg"], highlightthickness=0)
     canvas.pack(side="left", fill="both", expand=True)
 
     scrollbar = ttk.Scrollbar(results_frame, orient="vertical", command=canvas.yview)
@@ -47,12 +47,38 @@ def open_results_window(parent):
     canvas.configure(yscrollcommand=scrollbar.set)
 
     inner_frame = tk.Frame(canvas, bg=g.current_theme["bg"])
-    canvas.create_window((0, 0), window=inner_frame, anchor="nw")
+    scrollable_window = canvas.create_window((0, 0), window=inner_frame, anchor="nw")
 
     def on_frame_configure(event):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
+    def resize_canvas(event):
+        canvas.itemconfig(scrollable_window, width=event.width)
+
     inner_frame.bind("<Configure>", on_frame_configure)
+    canvas.bind("<Configure>", resize_canvas)
+
+    # --- Mouse wheel scrolling support ---
+    def _on_mousewheel(event):
+        if event.delta:
+            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")  # Windows/macOS
+        elif event.num == 4:
+            canvas.yview_scroll(-3, "units")  # Linux scroll up
+        elif event.num == 5:
+            canvas.yview_scroll(3, "units")   # Linux scroll down
+
+    canvas.bind("<Enter>", lambda e: _bind_mousewheel(canvas))
+    canvas.bind("<Leave>", lambda e: _unbind_mousewheel(canvas))
+
+    def _bind_mousewheel(widget):
+        widget.bind_all("<MouseWheel>", _on_mousewheel)        # Windows/macOS
+        widget.bind_all("<Button-4>", _on_mousewheel)          # Linux up
+        widget.bind_all("<Button-5>", _on_mousewheel)          # Linux down
+
+    def _unbind_mousewheel(widget):
+        widget.unbind_all("<MouseWheel>")
+        widget.unbind_all("<Button-4>")
+        widget.unbind_all("<Button-5>")
 
     def run_scheduler():
         for widget in inner_frame.winfo_children():
