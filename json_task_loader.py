@@ -2,15 +2,24 @@ import tkinter as tk
 from tkinter import messagebox
 import json
 import globals as g
-
+import os
+import sys
 entries = []
 selected_vars = {}  # maps row idx to BooleanVar for checkbox selection
 current_frame = None
 ui_extra_entries = 0  # number of unsaved empty new rows in UI
+JSON_PATH = "import_data.json" 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for development and for PyInstaller .exe """
+    try:
+        base_path = sys._MEIPASS  # PyInstaller sets this in onefile mode
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
-JSON_PATH = "D:\\internship\\DSA\\projects\\project4(decision making simulator)\\import_data.json"
-
-def load_data_from_json(filepath=JSON_PATH):
+def load_data_from_json(filepath=None):
+    if filepath is None:
+        filepath = resource_path("import_data.json")
     try:
         with open(filepath, 'r') as file:
             data = json.load(file)
