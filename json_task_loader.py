@@ -1,16 +1,46 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import filedialog
+import json
 import globals as g
-from json_utils import load_data_from_json, save_data_to_json, resource_path
 import os
 import sys
 
 entries = []
 selected_vars = {}  # maps row idx to BooleanVar for checkbox selection
 current_frame = None
-ui_extra_entries = 0  # number of unsaved empty new rows in UI
-JSON_PATH = "import_data.json" 
+ui_extra_entries = 0
+JSON_PATH = "import_data.json"
+
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
+def load_data_from_json(filepath=None):
+    if filepath is None:
+        filepath = resource_path("import_data.json")
+    try:
+        with open(filepath, 'r') as file:
+            data = json.load(file)
+        tasks = data.get('tasks', [])
+        constraints = data.get('constraints', [])
+        return tasks, constraints
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to load JSON:\n{e}")
+        return [], []
+
+
+def save_data_to_json(filepath=JSON_PATH):
+    try:
+        with open(filepath, 'w') as file:
+            json.dump({"tasks": g.tasks, "constraints": g.constraints}, file, indent=4)
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to save JSON:\n{e}")
 
 
 def create_entry_row(frame, task_data, row, select_vars, is_extra=False):
@@ -216,6 +246,7 @@ def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
         empty_task = {"name": "", "value": 0, "cost": 0, "category": "", "status": "Pending"}
         create_entry_row(scrollable_frame, empty_task, len(tasks) + i, selected_vars, is_extra=True)
 
+    # Make columns expand evenly
     for col in range(6):
         scrollable_frame.grid_columnconfigure(col, weight=1)
 
@@ -272,4 +303,4 @@ def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
     def on_resize(event):
         canvas.configure(width=event.width)
 
-    frame.bind("<Configure>", on_resize)
+    frame.bind("<Configure>", on_resize) 
