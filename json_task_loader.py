@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import json
+from tkinter import filedialog  # Add this below `from tkinter import messagebox`
 import globals as g
 import os
 import sys
@@ -151,6 +152,21 @@ def delete_selected_entries(select_vars):
     # Reload UI to reflect deletion
     if current_frame:
         load_tasks_to_frame(current_frame)
+def load_custom_json_file():
+    global current_frame, ui_extra_entries
+    filepath = filedialog.askopenfilename(
+        title="Select JSON File",
+        filetypes=[("JSON files", "*.json")]
+    )
+    if not filepath:
+        return  # User cancelled
+    tasks, constraints = load_data_from_json(filepath)
+    g.tasks = tasks
+    g.constraints = constraints
+    ui_extra_entries = 0
+    messagebox.showinfo("Loaded", f"Custom file loaded:\n{os.path.basename(filepath)}")
+    if current_frame:
+        load_tasks_to_frame(current_frame, load_into_globals=True)
 
 def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
     global current_frame, entries, selected_vars, ui_extra_entries
@@ -287,6 +303,7 @@ def load_tasks_to_frame(frame, tasks=None, load_into_globals=True):
     tk.Button(buttons_frame, text="Add New Entry", command=add_new_entry).pack(side="left", padx=5)
     tk.Button(buttons_frame, text="Delete Selected Entries", command=lambda: delete_selected_entries(selected_vars)).pack(side="left", padx=5)
     tk.Button(buttons_frame, text="Show Existing Data", command=show_existing_data).pack(side="left", padx=5)
+    tk.Button(buttons_frame, text="Load Custom JSON", command=load_custom_json_file).pack(side="left", padx=5)
     tk.Button(buttons_frame, text="Load to System", command=load_json_to_globals).pack(side="left", padx=5)
     tk.Button(buttons_frame, text="Save Changes", command=save_tasks).pack(side="right", padx=5)
 
