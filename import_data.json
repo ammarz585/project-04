@@ -3,7 +3,7 @@
         {
             "name": "task 01",
             "value": 21,
-            "cost": 1010,
+            "cost": 1010000000,
             "category": "A",
             "status": "Pending"
         },
@@ -129,7 +129,7 @@
         {
             "name": "task 19",
             "value": 39,
-            "cost": 1190,
+            "cost": 1190000,
             "category": "A",
             "status": "Pending"
         },
@@ -297,7 +297,7 @@
         {
             "name": "task 43",
             "value": 63,
-            "cost": 1430,
+            "cost": 14300000,
             "category": "A",
             "status": "Pending"
         },
@@ -719,6 +719,27 @@
             "value": 123,
             "cost": 2030,
             "category": "A",
+            "status": "Pending"
+        },
+        {
+            "name": "task 104",
+            "value": 124,
+            "cost": 20400,
+            "category": "D",
+            "status": "Pending"
+        },
+        {
+            "name": "TASK 105",
+            "value": 12500,
+            "cost": 2050,
+            "category": "B",
+            "status": "Pending"
+        },
+        {
+            "name": "task 107",
+            "value": 122434,
+            "cost": 52452462,
+            "category": "F",
             "status": "Pending"
         }
     ],

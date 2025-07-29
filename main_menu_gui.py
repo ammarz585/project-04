@@ -11,7 +11,7 @@ def open_main_menu():
     root.title("Decision-Based Task Scheduler")
     root.geometry("600x400")
     root.config(bg=g.current_theme["bg"])
-    root.minsize(1000, 500)
+    root.minsize(950, 550)
     root.bind("<Escape>", lambda e: root.quit())
 
     current_page_index = [0]
