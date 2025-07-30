@@ -4,7 +4,7 @@ import globals as g
 from themes import toggle_theme, apply_theme_to_widget
 from pages_load import load_task_form, load_results_window, load_graphs_window, load_user_guide
 import navigation_helpers as nav
-from report_generator import ReportGeneratorPage  # ✅ Must be a class-based Page
+from report_generator import ReportGeneratorPage  
 
 def open_main_menu():
     root = tk.Tk()
@@ -60,7 +60,7 @@ def open_main_menu():
         load_results_window(container),
         load_graphs_window(container),
         load_user_guide(container),
-        ReportGeneratorPage(container)  # ✅ Add report generator page as last page
+        ReportGeneratorPage(container)  
     ])
 
     for page in pages[1:]:

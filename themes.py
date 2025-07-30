@@ -2,37 +2,36 @@ import tkinter as tk
 import globals as g
 
 LIGHT_THEME = {
-    "bg": "#F9FAFF",                   # Very light blue-white
-    "fg": "#2C3E50",                   # Slate/navy text
-    "button_bg": "#7986CB",            # Lavender blue
-    "button_fg": "#FFFFFF",            # White button text
-    "button_active_bg": "#5C6BC0",     # Darker lavender on hover
+    "bg": "#F0FDF4",                   # Mint cream
+    "fg": "#1B4332",                   # Deep green text
+    "button_bg": "#2C7A7B",            # Teal
+    "button_fg": "#FFFFFF",            # White text
+    "button_active_bg": "#285E61",     # Darker teal on hover
     "button_active_fg": "#FFFFFF",
-    "highlight": "#D1C4E9",            # Light purple highlight
-    "menu_bg": "#ECEFF1",              # Cool light gray
-    "menu_fg": "#2C3E50",
-    "error_bg": "#FFCDD2",             # Soft pink
-    "error_fg": "#C62828",             # Deep red
-    "info_bg": "#BBDEFB",              # Light blue
-    "info_fg": "#0D47A1",              # Navy blue
-    "border_color": "#D6E4FF"          # Light blue-gray border
+    "highlight": "#C6F6D5",            # Pale mint
+    "menu_bg": "#E6FFFA",              # Soft aqua background
+    "menu_fg": "#1B4332",              # Match text color
+    "error_bg": "#FED7D7",             # Soft rose
+    "error_fg": "#C53030",             # Rich red
+    "info_bg": "#B2F5EA",              # Cool aqua
+    "info_fg": "#234E52",              # Deep teal
+    "border_color": "#A0AEC0"          # Muted gray-blue border
 }
-
 DARK_THEME = {
-    "bg": "#1A1B27",                   # Rich indigo/black
-    "fg": "#ECEFF1",                   # Light gray-blue text
-    "button_bg": "#3949AB",            # Indigo button
-    "button_fg": "#FFFFFF",            # White button text
-    "button_active_bg": "#303F9F",     # Darker indigo on hover
-    "button_active_fg": "#FFFFFF",
-    "highlight": "#7C4DFF",            # Electric violet
-    "menu_bg": "#2C2F3B",              # Dark blue-gray
-    "menu_fg": "#BBDEFB",              # Light blue text
-    "error_bg": "#B71C1C",             # Bold red
-    "error_fg": "#FFCDD2",             # Light red text
-    "info_bg": "#1565C0",              # Medium blue
-    "info_fg": "#E3F2FD",              # Pale blue text
-    "border_color": "#3F51B5"          # Visible indigo border
+    "bg": "#121417",                   # Deep gray-black
+    "fg": "#E0F2F1",                   # Pale mint-gray text
+    "button_bg": "#00838F",            # Dark cyan
+    "button_fg": "#E0F7FA",            # Soft light cyan text
+    "button_active_bg": "#006064",     # Deeper cyan
+    "button_active_fg": "#E0F7FA",
+    "highlight": "#00ACC1",            # Bright cyan highlight
+    "menu_bg": "#1F2933",              # Charcoal navy
+    "menu_fg": "#B2EBF2",              # Light aqua
+    "error_bg": "#B71C1C",             # Vivid red
+    "error_fg": "#FFEBEE",             # Light pink text
+    "info_bg": "#0288D1",              # Bright blue info
+    "info_fg": "#E1F5FE",              # Frosty blue text
+    "border_color": "#4DD0E1"          # Cyan-teal border
 }
 
 

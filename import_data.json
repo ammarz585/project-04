@@ -2099,13 +2099,6 @@
             "cost": 3205439,
             "category": "B",
             "status": "Pending"
-        },
-        {
-            "name": "task 301",
-            "value": 79347,
-            "cost": 43939111,
-            "category": "f",
-            "status": "Pending"
         }
     ],
     "constraints": []
